@@ -11,19 +11,21 @@ rescue Bundler::BundlerError => e
 end
 require 'rake'
 
-require 'jeweler'
-Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-  gem.name = "activerecord-postgres-custom-types"
-  gem.homepage = "http://github.com/rafalbigaj/activerecord-postgres-custom-types"
-  gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "rafal.bigaj@puzzleflow.com"
-  gem.authors = ["Rafał Bigaj"]
-  # dependencies defined in Gemfile
+unless RUBY_PLATFORM =~ /mswin/
+	require 'jeweler'
+	Jeweler::Tasks.new do |gem|
+		# gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
+		gem.name = "activerecord-postgres-custom-types"
+		gem.homepage = "http://github.com/rafalbigaj/activerecord-postgres-custom-types"
+		gem.license = "MIT"
+		gem.summary = %Q{TODO: one-line summary of your gem}
+		gem.description = %Q{TODO: longer description of your gem}
+		gem.email = "rafal.bigaj@puzzleflow.com"
+		gem.authors = ["Rafał Bigaj"]
+		# dependencies defined in Gemfile
+	end
+	Jeweler::RubygemsDotOrgTasks.new
 end
-Jeweler::RubygemsDotOrgTasks.new
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|

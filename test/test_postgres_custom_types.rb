@@ -16,7 +16,7 @@ class TestPostgresCustomTypes < Test::Unit::TestCase
 
 	should "accept custom type in where clausure" do
 		sql = Foo.where(comp: Compfoo.new([123, 'text 1'])).to_sql
-		assert_equal %Q(SELECT "foos".* FROM "foos" WHERE "foos"."comp" = (123,'text 1')::compfoo), sql.gsub(/ +/, ' ')
+		assert_equal %Q(SELECT "foos".* FROM "foos" WHERE "foos"."comp" = '(123,"text 1")'::compfoo), sql.gsub(/ +/, ' ')
 	end
 
 	should "create new record with compound object" do
@@ -25,7 +25,6 @@ class TestPostgresCustomTypes < Test::Unit::TestCase
 		assert_kind_of Compfoo, foo.comp
 		assert_equal 123, foo.comp.f1
 		assert_equal 'text 1', foo.comp.f2
-		Foo.all.each {|foo| p foo}
 		assert Foo.where(comp: Compfoo.new([123, 'text 1'])).exists?
 	end
 

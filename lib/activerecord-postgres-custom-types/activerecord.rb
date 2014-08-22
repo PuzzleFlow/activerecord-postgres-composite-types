@@ -29,10 +29,8 @@ module ActiveRecord
 
 			# Quotes the column value to help prevent {SQL injection attacks}
 			def quote_with_custom_types(value, column = nil)
-p [value, column]
-puts caller(0).join("\n")
 				if value.class < PostgresAbstractCustomType
-					PostgreSQLColumn.custom_type_to_string(value, self)
+					"'#{PostgreSQLColumn.custom_type_to_string(value, self).gsub(/'/, "''")}'"
 				else
 					quote_without_custom_types(value, column)
 				end
@@ -77,7 +75,7 @@ puts caller(0).join("\n")
 				def register_arel_visitor(type, klass)
 					Arel::Visitors::ToSql.class_eval <<-RUBY
 						def visit_#{klass}(o, a)
-							PostgreSQLColumn.custom_type_to_string(o, @connection) + '::#{type}'
+							@connection.quote(o) + '::#{type}'
 						end
 					RUBY
 				end
@@ -131,6 +129,7 @@ puts caller(0).join("\n")
 
 				end
 			end
+
 			# ??
 			# alias_method_chain :type_cast, :custom_types
 
@@ -144,7 +143,16 @@ puts caller(0).join("\n")
 			def self.custom_type_to_string(object, adapter)
 				quoted_values = object.class.columns.collect do |column|
 					value = object.send(column.name)
-					adapter.quote(value, column)
+					if String === value
+						if value == "NULL"
+							"\"#{value}\""
+						else
+							quote_and_escape(adapter.type_cast(value, column, true))
+						end
+					else
+						adapter.type_cast(value, column, true)
+					end
+					# adapter.quote(value, column)
 				end
 				"(#{quoted_values.join(',')})"
 			end

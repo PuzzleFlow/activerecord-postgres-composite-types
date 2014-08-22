@@ -8,7 +8,7 @@ end
 
 SimpleCov.configure do
   clean_filters
-  load_adapter 'test_frameworks'
+  load_profile 'test_frameworks'
 end
 
 ENV["COVERAGE"] && SimpleCov.start do
@@ -17,18 +17,22 @@ end
 require 'rubygems'
 require 'bundler'
 begin
-  Bundler.setup(:default, :development)
+  Bundler.require(:default, :development)
 rescue Bundler::BundlerError => e
   $stderr.puts e.message
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
-require 'test/unit'
-require 'shoulda'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'activerecord-postgres-custom-types'
 
+Combustion.path = 'internal'
+Combustion.initialize! :active_record
+
 class Test::Unit::TestCase
+	def connection
+		ActiveRecord::Base.connection
+	end
 end

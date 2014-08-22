@@ -11,7 +11,7 @@ ActiveRecord::Schema.define do
 	execute "CREATE TYPE compfoo AS (f1 int, f2 text)"
 
 	create_table :foos, :id => false do |t|
-		t.compfoo :comp, :default => Compfoo.new([0,''])
+		t.compfoo :comp, default: Compfoo.new([0,''])
 	end
 
 	execute "INSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\\d e f'))"
