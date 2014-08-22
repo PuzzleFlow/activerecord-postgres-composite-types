@@ -1,4 +1,4 @@
-require "activerecord-postgres-custom-types/activerecord"
+require "activerecord-postgres-custom-types/active_record"
 
 class Compfoo < PostgresAbstractCustomType
 	consist_of [:f1, nil, 'int4', true],
@@ -16,5 +16,5 @@ ActiveRecord::Schema.define do
 
 	execute "INSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\\d e f'))"
 
-	connection.send(:reload_type_map)
+	connection.send(:reload_type_map) if ActiveRecord::VERSION::MAJOR > 3
 end

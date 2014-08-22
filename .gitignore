@@ -50,3 +50,6 @@ pkg
 
 #RubyMine
 .idea
+
+#Test log
+test/internal/log

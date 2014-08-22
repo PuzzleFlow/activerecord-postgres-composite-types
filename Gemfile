@@ -1,7 +1,9 @@
 source 'https://support.puzzleflow.com/packages'
 # source 'http://rubygems.org'
 
-gem 'activerecord', '>= 3.2.0'
+AR_VERSION = '4.1.0'
+
+gem 'activerecord', "~> #{AR_VERSION}"
 gem 'pg-binaries', '1.0.2', require: 'pg_binaries'
 gem 'pg', '0.17.0'
 
@@ -14,5 +16,5 @@ group :development do
 	gem 'jeweler', '~> 2.0.1' unless RUBY_PLATFORM =~ /mswin/
 	gem 'simplecov', '>= 0'
 	gem 'combustion', '~> 0.5.2'
-	gem 'tzinfo-data'
+	gem 'tzinfo-data' if AR_VERSION > '3.2.0'
 end
