@@ -1,0 +1,702 @@
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (3.0ms)[0m  DROP TABLE "foos"
+PG::UndefinedTable: BŁĄD:  tabela "foos" nie istnieje
+: DROP TABLE "foos"
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (1.0ms)[0m  DROP TABLE "foos"
+PG::UndefinedTable: BŁĄD:  tabela "foos" nie istnieje
+: DROP TABLE "foos"
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (0.0ms)[0m  DROP TABLE "foos"
+PG::UndefinedTable: BŁĄD:  tabela "foos" nie istnieje
+: DROP TABLE "foos"
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (0.0ms)[0m  DROP TABLE "foos"
+PG::UndefinedTable: BŁĄD:  tabela "foos" nie istnieje
+: DROP TABLE "foos"
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (5.0ms)[0m  CREATE TABLE "foos" ("id" serial primary key, "comp" compfoo DEFAULT '(0,'''')::compfoo') 
+PG::InvalidTextRepresentation: BŁĄD:  nieprawidłowy literał rekordu: "(0,'')::compfoo"
+DETAIL:  Śmieci za prawym nawiasem.
+: CREATE TABLE "foos" ("id" serial primary key, "comp" compfoo DEFAULT '(0,'''')::compfoo') 
+  [1m[36m (1.0ms)[0m  [1mDROP TABLE "foos"[0m
+PG::UndefinedTable: BŁĄD:  tabela "foos" nie istnieje
+: DROP TABLE "foos"
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (45.0ms)[0m  CREATE TABLE "foos" ("id" serial primary key, "comp" compfoo DEFAULT '(0,'''')') 
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO foo VALUES (0,abc), (1,'a/b''c/d')[0m
+PG::UndefinedTable: BŁĄD:  relacja "foo" nie istnieje
+LINE 1: INSERT INTO foo VALUES (0,abc), (1,'a/b''c/d')
+                    ^
+: INSERT INTO foo VALUES (0,abc), (1,'a/b''c/d')
+  [1m[35m (2.0ms)[0m  DROP TABLE "foos"
+  [1m[36m (0.0ms)[0m  [1mDROP TYPE compfoo[0m
+  [1m[36m (2.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (55.0ms)[0m  CREATE TABLE "foo" ("id" serial primary key, "comp" compfoo DEFAULT '(0,'''')') 
+  [1m[36m (6.0ms)[0m  [1mINSERT INTO foo VALUES (0,abc), (1,'a/b''c/d')[0m
+PG::UndefinedColumn: BŁĄD:  kolumna "abc" nie istnieje
+LINE 1: INSERT INTO foo VALUES (0,abc), (1,'a/b''c/d')
+                                  ^
+: INSERT INTO foo VALUES (0,abc), (1,'a/b''c/d')
+  [1m[35m (1.0ms)[0m  DROP TABLE "foos"
+PG::UndefinedTable: BŁĄD:  tabela "foos" nie istnieje
+: DROP TABLE "foos"
+  [1m[36m (4.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (49.0ms)[0m  CREATE TABLE "foo" ("id" serial primary key, "comp" compfoo DEFAULT '(0,'''')') 
+  [1m[36m (5.0ms)[0m  [1mINSERT INTO foo VALUES (0,'abc'), (1,'a/b''c/d')[0m
+PG::InvalidTextRepresentation: BŁĄD:  nieprawidłowy literał rekordu: "abc"
+LINE 1: INSERT INTO foo VALUES (0,'abc'), (1,'a/b''c/d')
+                                  ^
+DETAIL:  Brak lewego nawiasu.
+: INSERT INTO foo VALUES (0,'abc'), (1,'a/b''c/d')
+  [1m[35m (1.0ms)[0m  DROP TABLE "foos"
+PG::UndefinedTable: BŁĄD:  tabela "foos" nie istnieje
+: DROP TABLE "foos"
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (52.0ms)[0m  CREATE TABLE "foo" ("id" serial primary key, "comp" compfoo DEFAULT '(0,'''')') 
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO foo VALUES (0,'abc')[0m
+PG::InvalidTextRepresentation: BŁĄD:  nieprawidłowy literał rekordu: "abc"
+LINE 1: INSERT INTO foo VALUES (0,'abc')
+                                  ^
+DETAIL:  Brak lewego nawiasu.
+: INSERT INTO foo VALUES (0,'abc')
+  [1m[35m (1.0ms)[0m  DROP TABLE "foos"
+PG::UndefinedTable: BŁĄD:  tabela "foos" nie istnieje
+: DROP TABLE "foos"
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (55.0ms)[0m  CREATE TABLE "foo" ("id" serial primary key, "comp" compfoo DEFAULT '(0,'''')') 
+  [1m[36m (3.0ms)[0m  [1mINSERT INTO foo VALUES (0,'abc')[0m
+PG::InvalidTextRepresentation: BŁĄD:  nieprawidłowy literał rekordu: "abc"
+LINE 1: INSERT INTO foo VALUES (0,'abc')
+                                  ^
+DETAIL:  Brak lewego nawiasu.
+: INSERT INTO foo VALUES (0,'abc')
+  [1m[35m (4.0ms)[0m  DROP TABLE "foo"
+  [1m[36m (1.0ms)[0m  [1mDROP TYPE compfoo[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (48.0ms)[0m  CREATE TABLE "foo" ("id" serial primary key, "comp" compfoo DEFAULT '(0,'''')') 
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO foo VALUES ((0,abc)), ((1,'a/b''c/d'))[0m
+PG::UndefinedColumn: BŁĄD:  kolumna "abc" nie istnieje
+LINE 1: INSERT INTO foo VALUES ((0,abc)), ((1,'a/b''c/d'))
+                                   ^
+: INSERT INTO foo VALUES ((0,abc)), ((1,'a/b''c/d'))
+  [1m[35m (2.0ms)[0m  DROP TABLE "foo"
+  [1m[36m (0.0ms)[0m  [1mDROP TYPE compfoo[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (48.0ms)[0m  CREATE TABLE "foo" ("id" serial primary key, "comp" compfoo DEFAULT '(0,'''')') 
+  [1m[36m (7.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+PG::DatatypeMismatch: BŁĄD:  kolumna "id" jest typu integer ale wyrażenie jest typu record
+LINE 1: INSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))
+                                ^
+HINT:  Będziesz musiał przepisać lub rzutować wyrażenie.
+: INSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))
+  [1m[35m (7.0ms)[0m  DROP TABLE "foo"
+  [1m[36m (1.0ms)[0m  [1mDROP TYPE compfoo[0m
+  [1m[36m (2.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (53.0ms)[0m  CREATE TABLE "foo" ("id" serial primary key, "comp" compfoo DEFAULT '(0,'''')') 
+  [1m[36m (6.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+PG::DatatypeMismatch: BŁĄD:  kolumna "id" jest typu integer ale wyrażenie jest typu record
+LINE 1: INSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))
+                                ^
+HINT:  Będziesz musiał przepisać lub rzutować wyrażenie.
+: INSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (55.0ms)[0m  CREATE TABLE "foo" ("id" serial primary key, "comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (6.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+PG::DatatypeMismatch: BŁĄD:  kolumna "id" jest typu integer ale wyrażenie jest typu record
+LINE 1: INSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))
+                                ^
+HINT:  Będziesz musiał przepisać lub rzutować wyrażenie.
+: INSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (31.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM foo
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (26.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM foo
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (29.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM foo
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (30.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM foo
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (30.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM foo
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (24.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (1.0ms)[0m  SELECT * FROM foo
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (31.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM foo
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (25.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (1.0ms)[0m  SELECT * FROM foo
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (35.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM foo
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (27.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM foo
+  [1m[36m (2.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (38.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (2.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (32.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (31.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (26.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM foo
+  [1m[36m (2.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (22.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (1.0ms)[0m  SELECT * FROM foo
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (24.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (1.0ms)[0m  SELECT * FROM foo
+  [1m[36m (4.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (37.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM foo
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (18.0ms)[0m  CREATE TABLE "foo" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foo VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+PG::UndefinedTable: BŁĄD:  relacja "foos" nie istnieje
+LINE 5:                WHERE a.attrelid = '"foos"'::regclass
+                                          ^
+:               SELECT a.attname, format_type(a.atttypid, a.atttypmod),
+                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
+                FROM pg_attribute a LEFT JOIN pg_attrdef d
+                  ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+               WHERE a.attrelid = '"foos"'::regclass
+                 AND a.attnum > 0 AND NOT a.attisdropped
+               ORDER BY a.attnum
+
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (27.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[36m (2.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (42.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  [1mSELECT "foos".* FROM "foos"[0m
+  [1m[36m (9.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (30.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c/d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  [1mSELECT "foos".* FROM "foos"[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (31.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  [1mSELECT "foos".* FROM "foos"[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (27.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  [1mSELECT "foos".* FROM "foos"[0m
+  [1m[36m (2.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (29.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\d'))[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  [1mSELECT "foos".* FROM "foos"[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (27.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  [1mSELECT "foos".* FROM "foos"[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (32.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\d'))[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  [1mSELECT "foos".* FROM "foos"[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (32.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\d'))[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  [1mSELECT "foos".* FROM "foos"[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (30.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  [1mSELECT "foos".* FROM "foos"[0m
+  [1m[36m (1.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (28.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  [1mSELECT "foos".* FROM "foos"[0m
+  [1m[36m (2.0ms)[0m  [1mCREATE TYPE compfoo AS (f1 int, f2 text)[0m
+  [1m[35m (32.0ms)[0m  CREATE TABLE "foos" ("comp" compfoo DEFAULT (0,'')) 
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\d'))[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  [1mSELECT "foos".* FROM "foos"[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(,)::compfoo"]]
+PG::InvalidTextRepresentation: BŁĄD:  nieprawidłowy literał rekordu: "(,)::compfoo"
+DETAIL:  Śmieci za prawym nawiasem.
+: INSERT INTO "foos" ("comp") VALUES ($1)
+  [1m[36m (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "foos" ("comp") VALUES ($1)[0m  [["comp", nil]]
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(,)"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", nil]]
+  [1m[36m (5.0ms)[0m  [1mCOMMIT[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(,)"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", nil]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(,)"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", nil]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(,)"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", nil]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(,)"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", nil]]
+  [1m[36m (7.0ms)[0m  [1mCOMMIT[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(,)"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", nil]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (1.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (2.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (1.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+PG::FeatureNotSupported: BŁĄD:  wejście dla anonimowych typów złożonych nie jest realizowane
+LINE 1: ...LECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''t...
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = '(123, ''text 1'')::compfoo' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "comp"."f2" = 'text 1' LIMIT 1
+PG::UndefinedTable: BŁĄD:  brakująca klauzula FROM dla tabeli "comp"
+LINE 1: SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "c...
+                                            ^
+: SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "comp"."f2" = 'text 1' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "comp"."f2" = 'text 1' LIMIT 1
+PG::UndefinedTable: BŁĄD:  brakująca klauzula FROM dla tabeli "comp"
+LINE 1: SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "c...
+                                            ^
+: SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "comp"."f2" = 'text 1' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "comp"."f2" = 'text 1' LIMIT 1
+PG::UndefinedTable: BŁĄD:  brakująca klauzula FROM dla tabeli "comp"
+LINE 1: SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "c...
+                                            ^
+: SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "comp"."f2" = 'text 1' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "comp"."f2" = 'text 1' LIMIT 1
+PG::UndefinedTable: BŁĄD:  brakująca klauzula FROM dla tabeli "comp"
+LINE 1: SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "c...
+                                            ^
+: SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "comp"."f2" = 'text 1' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "comp"."f2" = 'text 1' LIMIT 1
+PG::UndefinedTable: BŁĄD:  brakująca klauzula FROM dla tabeli "comp"
+LINE 1: SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "c...
+                                            ^
+: SELECT  1 AS one FROM "foos"  WHERE "comp"."f1" = 123 AND "comp"."f2" = 'text 1' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (1.0ms)[0m  BEGIN
+  [1m[36m (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (1.0ms)[0m  BEGIN
+  [1m[36m (0.0ms)[0m  [1mROLLBACK[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,text 1)"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,text 1) LIMIT 1
+PG::SyntaxError: BŁĄD:  błąd składni w lub blisko "1"
+LINE 1: ... one FROM "foos"  WHERE "foos"."comp" = (123,text 1) LIMIT 1
+                                                             ^
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,text 1) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (1.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (46.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (5.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1') LIMIT 1
+PG::DatatypeMismatch: BŁĄD:  nie można porównywać niepodobnych typów kolumn text i unknown w kolumnie rekordu 2
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1') LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1') LIMIT 1
+PG::DatatypeMismatch: BŁĄD:  nie można porównywać niepodobnych typów kolumn text i unknown w kolumnie rekordu 2
+: SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1') LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(321,'text 2')"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(321,'text 2')"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  SELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (321,'text 2')::compfoo LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "foos" ("comp") VALUES ($1)[0m  [["comp", "(321,'text 2')"]]
+  [1m[35m (6.0ms)[0m  COMMIT
+  [1m[36mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (321,'text 2')::compfoo LIMIT 1[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (1.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "foos" ("comp") VALUES ($1)[0m  [["comp", "(321,'text 2')"]]
+  [1m[35m (6.0ms)[0m  COMMIT
+  [1m[36mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (321,'text 2')::compfoo LIMIT 1[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "foos" ("comp") VALUES ($1)[0m  [["comp", "(321,'text 2')"]]
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (321,'text 2')::compfoo LIMIT 1[0m
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Exists (2.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "foos" ("comp") VALUES ($1)[0m  [["comp", "(321,'text 2')"]]
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (321,'text 2')::compfoo LIMIT 1[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (5.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (1.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "foos" ("comp") VALUES ($1)[0m  [["comp", "(321,'text 2')"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+  [1m[36mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (321,'text 2')::compfoo LIMIT 1[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "foos" ("comp") VALUES ($1)[0m  [["comp", "(321,'text 2')"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+  [1m[36mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (321,'text 2')::compfoo LIMIT 1[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (1.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (1.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "foos" ("comp") VALUES ($1)[0m  [["comp", "(321,'text 2')"]]
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (321,'text 2')::compfoo LIMIT 1[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (1.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (0.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (1.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "foos" ("comp") VALUES ($1)[0m  [["comp", "(321,'text 2')"]]
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36mTestPostgresCustomTypes::Foo Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (321,'text 2')::compfoo LIMIT 1[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "foos"[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "foos" ("comp") VALUES ($1)  [["comp", "(123,'text 1')"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mTestPostgresCustomTypes::Foo Load (0.0ms)[0m  SELECT "foos".* FROM "foos"
+  [1m[36mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (123,'text 1')::compfoo LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "foos" ("comp") VALUES ($1)[0m  [["comp", "(321,'text 2')"]]
+  [1m[35m (0.0ms)[0m  COMMIT
+  [1m[36mTestPostgresCustomTypes::Foo Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "foos"  WHERE "foos"."comp" = (321,'text 2')::compfoo LIMIT 1[0m
