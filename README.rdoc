@@ -1,5 +1,6 @@
 ﻿{<img src="https://codeclimate.com/github/PuzzleFlow/activerecord-postgres-custom-types/badges/gpa.svg" />}[https://codeclimate.com/github/PuzzleFlow/activerecord-postgres-custom-types]
 {<img src="https://semaphoreapp.com/api/v1/projects/5b12135f-1d6f-4158-bff1-08d324664b70/235702/badge.png" />}[https://semaphoreapp.com/puzzleflow/activerecord-postgres-custom-types]
+{<img src="https://travis-ci.org/PuzzleFlow/activerecord-postgres-custom-types.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/PuzzleFlow/activerecord-postgres-custom-types]
 
 = ActiveRecord PostgreSQL Composite Types
 
