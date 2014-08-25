@@ -33,6 +33,6 @@ class TestCustomTypeClass < Test::Unit::TestCase
 
 	should "cast to qouted string" do
 		value = MyTypeClass.new(number: 1, text: '"\'a\'bc[]*/\"')
-		assert_equal "(1,'\"''a''bc[]*/\\\"')", value.quote(connection)
+		assert_equal %Q{'(1,"\\\"''a''bc[]*/\\\\\\\"")'}, connection.quote(value)
 	end
 end

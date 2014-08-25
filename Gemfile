@@ -1,10 +1,8 @@
-source 'https://support.puzzleflow.com/packages'
-# source 'http://rubygems.org'
+source 'http://rubygems.org'
 
 AR_VERSION = '4.1.0'
 
 gem 'activerecord', "~> #{AR_VERSION}"
-gem 'pg-binaries', '1.0.2', require: 'pg_binaries'
 gem 'pg', '0.17.0'
 
 group :development do

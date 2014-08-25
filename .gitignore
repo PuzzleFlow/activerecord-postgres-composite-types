@@ -51,5 +51,7 @@ pkg
 #RubyMine
 .idea
 
-#Test log
+#Test files
 test/internal/log
+
+Gemfile.lock

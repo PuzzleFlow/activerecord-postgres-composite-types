@@ -1,8 +1,12 @@
-= activerecord-postgres-custom-types
+﻿= ActiveRecord PostgreSQL Composite Types
 
-Description goes here.
+{<img src="https://codeclimate.com/github/PuzzleFlow/activerecord-postgres-custom-types/badges/gpa.svg" />}[https://codeclimate.com/github/PuzzleFlow/activerecord-postgres-custom-types]
 
-== Contributing to activerecord-postgres-custom-types
+
+This gem adds support to the ActiveRecord (3.x and 4.x) for composite times.
+
+
+== Contributing to ActiveRecord PostgreSQL Composite Types
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.

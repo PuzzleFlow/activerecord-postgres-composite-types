@@ -28,7 +28,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'activerecord-postgres-custom-types'
 
-Combustion.path = 'internal'
+Combustion.path = 'test/internal'
 Combustion.initialize! :active_record
 
 class Test::Unit::TestCase
