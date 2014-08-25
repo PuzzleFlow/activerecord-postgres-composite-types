@@ -1,5 +1,5 @@
 test:
   adapter:  postgresql
-  database: test_custom_types
-  username: postgres
-  password: postgres
+  database: <%= ENV['DATABASE_NAME_TEST'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
