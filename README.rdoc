@@ -4,7 +4,7 @@
 
 = ActiveRecord PostgreSQL Composite Types
 
-This gem adds support to the ActiveRecord (3.x and 4.x) for composite times.
+This gem adds support to the ActiveRecord (3.x and 4.x) for composite types.
 
 == Contributing to ActiveRecord PostgreSQL Composite Types
  
