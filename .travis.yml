@@ -1,0 +1,4 @@
+addons:
+  postgresql: "9.3"
+before_script:
+  - cp test/internal/config/database.yml.travis test/internal/config/database.yml
