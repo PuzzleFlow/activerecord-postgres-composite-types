@@ -5,38 +5,38 @@ module ActiveRecord
 
 		class PostgreSQLAdapter
 			# Cast a +value+ to a type that the database understands.
-			def type_cast_with_custom_types(value, column)
+			def type_cast_with_composite_types(value, column)
 				case value
-					when PostgresAbstractCustomType
-						PostgreSQLColumn.custom_type_to_string(value, self)
+					when PostgresCompositeType
+						PostgreSQLColumn.composite_type_to_string(value, self)
 					when Array, Hash
-						if klass = column.custom_type_class
+						if klass = column.composite_type_class
 							value = klass.new(value)
-							PostgreSQLColumn.custom_type_to_string(value, self)
+							PostgreSQLColumn.composite_type_to_string(value, self)
 						else
-							type_cast_without_custom_types(value, column)
+							type_cast_without_composite_types(value, column)
 						end
 					else
-						type_cast_without_custom_types(value, column)
+						type_cast_without_composite_types(value, column)
 				end
 			end
 
-			alias_method_chain :type_cast, :custom_types
+			alias_method_chain :type_cast, :composite_types
 		end
 
 		class PostgreSQLColumn < Column
-			# Adds custom type for the column.
+			# Adds composite type for the column.
 
 			# Casts value (which is a String) to an appropriate instance.
-			def type_cast_with_custom_types(value)
-				if custom_type_klass = PostgreSQLAdapter.custom_type_classes[type]
-					self.class.string_to_custom_type(custom_type_klass, value)
+			def type_cast_with_composite_types(value)
+				if composite_type_klass = PostgreSQLAdapter.composite_type_classes[type]
+					self.class.string_to_composite_type(composite_type_klass, value)
 				else
-					type_cast_without_custom_types(value)
+					type_cast_without_composite_types(value)
 				end
 			end
 
-			alias_method_chain :type_cast, :custom_types
+			alias_method_chain :type_cast, :composite_types
 
 			# quote_and_escape - Rails 4 code
 
@@ -53,7 +53,7 @@ module ActiveRecord
 				end
 			end
 
-			def self.custom_type_to_string(object, adapter)
+			def self.composite_type_to_string(object, adapter)
 				quoted_values = object.class.columns.collect do |column|
 					value = object.send(column.name)
 					if String === value
@@ -69,25 +69,25 @@ module ActiveRecord
 				"(#{quoted_values.join(',')})"
 			end
 
-			def type_cast_code_with_custom_types(var_name)
-				if custom_type_klass = PostgreSQLAdapter.custom_type_classes[type]
-					"#{self.class}.string_to_custom_type(#{custom_type_klass}, #{var_name})"
+			def type_cast_code_with_composite_types(var_name)
+				if composite_type_klass = PostgreSQLAdapter.composite_type_classes[type]
+					"#{self.class}.string_to_composite_type(#{composite_type_klass}, #{var_name})"
 				else
-					type_cast_code_without_custom_types(value)
+					type_cast_code_without_composite_types(value)
 				end
 			end
 
-			alias_method_chain :type_cast_code, :custom_types
+			alias_method_chain :type_cast_code, :composite_types
 		end
 	end
 
 	module AttributeMethods
-		module CustomTypes
+		module CompositeTypes
 			extend ActiveSupport::Concern
 
 			def type_cast_attribute_for_write(column, value)
-				if klass = column.custom_type_class
-					# Cast Hash and Array to custom type klass
+				if klass = column.composite_type_class
+					# Cast Hash and Array to composite type klass
 					if value.is_a?(klass)
 						value
 					else
@@ -100,5 +100,5 @@ module ActiveRecord
 		end
 	end
 
-	Base.send :include, AttributeMethods::CustomTypes
+	Base.send :include, AttributeMethods::CompositeTypes
 end

@@ -3,14 +3,14 @@ if ActiveRecord::VERSION::MAJOR > 3
 	ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID.alias_type 'rgb_color', 'text'
 end
 
-class Compfoo < PostgresAbstractCustomType
+class Compfoo < PostgresCompositeType
 	register_type :compfoo
 end
 
-class MyType < PostgresAbstractCustomType
+class MyType < PostgresCompositeType
 	register_type :my_type
 end
 
-class NestedType < PostgresAbstractCustomType
+class NestedType < PostgresCompositeType
 	register_type :nested_type
 end

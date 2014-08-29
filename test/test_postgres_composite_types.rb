@@ -1,6 +1,6 @@
 require_relative 'helper'
 
-class TestPostgresCustomTypes < Test::Unit::TestCase
+class TestPostgresCompositeTypes < Test::Unit::TestCase
 	class Foo < ActiveRecord::Base
 
 	end
@@ -14,7 +14,7 @@ class TestPostgresCustomTypes < Test::Unit::TestCase
 		assert_equal "a/b'c\\d e f", foos[1].comp.f2
 	end
 
-	should "accept custom type in where clausure" do
+	should "accept composite type in where clausure" do
 		sql = Foo.where(comp: Compfoo.new([123, 'text 1'])).to_sql
 		assert_equal %Q(SELECT "foos".* FROM "foos" WHERE "foos"."comp" = '(123,"text 1")'::compfoo), sql.gsub(/ +/, ' ')
 	end

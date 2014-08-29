@@ -18,8 +18,8 @@ unless RUBY_PLATFORM =~ /mswin/
 		gem.name = "activerecord-postgres-custom-types"
 		gem.homepage = "http://github.com/rafalbigaj/activerecord-postgres-custom-types"
 		gem.license = "MIT"
-		gem.summary = %Q{TODO: one-line summary of your gem}
-		gem.description = %Q{TODO: longer description of your gem}
+		gem.summary = %Q{ActiveRecord composite types support}
+		gem.description = %Q{This gem adds support to the ActiveRecord (3.x and 4.x) for composite types.}
 		gem.email = "rafal.bigaj@puzzleflow.com"
 		gem.authors = ["Rafal Bigaj"]
 		# dependencies defined in Gemfile

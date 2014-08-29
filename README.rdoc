@@ -1,10 +1,52 @@
 ﻿{<img src="https://codeclimate.com/github/PuzzleFlow/activerecord-postgres-custom-types/badges/gpa.svg" />}[https://codeclimate.com/github/PuzzleFlow/activerecord-postgres-custom-types]
-{<img src="https://semaphoreapp.com/api/v1/projects/5b12135f-1d6f-4158-bff1-08d324664b70/235702/badge.png" />}[https://semaphoreapp.com/puzzleflow/activerecord-postgres-custom-types]
-{<img src="https://travis-ci.org/PuzzleFlow/activerecord-postgres-custom-types.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/PuzzleFlow/activerecord-postgres-custom-types]
+{<img src="https://travis-ci.org/PuzzleFlow/activerecord-postgres-composite-types.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/PuzzleFlow/activerecord-postgres-composite-types]
 
 = ActiveRecord PostgreSQL Composite Types
 
 This gem adds support to the ActiveRecord (3.x and 4.x) for composite types.
+
+One of PostgreSQL interesting feature is composite types — it basically allows to group related columns into a single type declaration like this:
+
+  create type complex as (
+    number real,
+    title text
+  );
+
+Form this moment a type 'complex' is a regular PostgreSQL type and can be used in functions, column definitions, other types definition, etc.
+ActiveRecord, especially from version 4.0, has extended set of supported types like arrays, hstore, json, range, ...
+But there is no support for user defined composite types.
+
+== The Goal
+
+For my composite type 'complex' and table like this:
+
+  create_table :foos, :id => false do |t|
+    t.column :comp, :complex, default: "(0,\"\")"
+  end
+
+I can access my data in simple and natural way:
+
+  class Foo < ActiveRecord::Base
+  end
+
+  foo = Foo.create!(:comp => {:number => 1.2, :title => "Cool!"})
+
+or
+
+  foo = Foo.create!(:comp => [1.2, "Cool!"])
+
+and then
+
+  foo.comp.number # => 1.2
+  foo.comp.title # => "Cool!"
+
+To achieve this goal I only have to define my composite type in a following way:
+
+  class ComplexType < PostgresCompositeType
+    register_type :complex
+  end
+
+That's all folks.
 
 == Contributing to ActiveRecord PostgreSQL Composite Types
  

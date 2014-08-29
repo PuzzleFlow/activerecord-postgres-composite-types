@@ -1,4 +1,4 @@
-require "activerecord-postgres-custom-types/active_record"
+require "activerecord-postgres-composite-types/active_record"
 
 ActiveRecord::Schema.define do
 	execute "CREATE TYPE compfoo AS (f1 int, f2 text)"

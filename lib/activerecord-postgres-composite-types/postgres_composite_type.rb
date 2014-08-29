@@ -1,4 +1,4 @@
-class PostgresAbstractCustomType
+class PostgresCompositeType
 	include Comparable
 
 	class << self
@@ -9,7 +9,7 @@ class PostgresAbstractCustomType
 
 		def register_type(type)
 			@type = type.to_sym
-			ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.register_custom_type_class(self)
+			ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.register_composite_type_class(self)
 		end
 
 		def use_connection_class(active_record_class)
@@ -37,7 +37,7 @@ class PostgresAbstractCustomType
 
 		case value
 			when String
-				ActiveRecord::ConnectionAdapters::PostgreSQLColumn.string_to_custom_type(self.class, value)
+				ActiveRecord::ConnectionAdapters::PostgreSQLColumn.string_to_composite_type(self.class, value)
 			when Array
 				set_values value
 			when Hash
