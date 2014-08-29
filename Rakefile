@@ -21,7 +21,7 @@ unless RUBY_PLATFORM =~ /mswin/
 		gem.summary = %Q{TODO: one-line summary of your gem}
 		gem.description = %Q{TODO: longer description of your gem}
 		gem.email = "rafal.bigaj@puzzleflow.com"
-		gem.authors = ["Rafał Bigaj"]
+		gem.authors = ["Rafal Bigaj"]
 		# dependencies defined in Gemfile
 	end
 	Jeweler::RubygemsDotOrgTasks.new

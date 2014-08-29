@@ -1,9 +1,9 @@
 source 'http://rubygems.org'
 
-AR_VERSION = '4.1.0'
+AR_VERSION = '3.2.0'
 
-gem 'activerecord', "~> #{AR_VERSION}"
-gem 'pg', '0.17.0'
+gem 'activerecord', ">= #{AR_VERSION}"
+gem 'pg', '>= 0.17.0'
 
 group :development do
 	gem 'test-unit', '~> 2.1'
