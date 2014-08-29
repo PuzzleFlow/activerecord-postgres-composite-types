@@ -1,4 +1,4 @@
-﻿{<img src="https://codeclimate.com/github/PuzzleFlow/activerecord-postgres-custom-types/badges/gpa.svg" />}[https://codeclimate.com/github/PuzzleFlow/activerecord-postgres-custom-types]
+﻿{<img src="https://codeclimate.com/github/PuzzleFlow/activerecord-postgres-composite-types/badges/gpa.svg" />}[https://codeclimate.com/github/PuzzleFlow/activerecord-postgres-composite-types]
 {<img src="https://travis-ci.org/PuzzleFlow/activerecord-postgres-composite-types.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/PuzzleFlow/activerecord-postgres-composite-types]
 
 = ActiveRecord PostgreSQL Composite Types
