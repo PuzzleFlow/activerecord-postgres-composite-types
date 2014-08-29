@@ -1,20 +1,19 @@
 require "activerecord-postgres-custom-types/active_record"
 
-class Compfoo < PostgresAbstractCustomType
-	consist_of [:f1, nil, 'int4', true],
-						 [:f2, nil, 'text', true]
-end
-
-ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.register_custom_types(compfoo: Compfoo)
-
 ActiveRecord::Schema.define do
 	execute "CREATE TYPE compfoo AS (f1 int, f2 text)"
+	execute "CREATE TYPE my_type AS (name varchar, number int, date timestamp)"
+	execute "CREATE DOMAIN rgb_color AS TEXT CHECK(VALUE IN ('red', 'green', 'blue'))"
+	execute "CREATE TYPE nested_type AS (comp compfoo, color rgb_color)"
 
 	create_table :foos, :id => false do |t|
-		t.compfoo :comp, default: Compfoo.new([0,''])
+		t.column :comp, :compfoo, default: "(0,\"\")"
+	end
+
+	create_table :bars, :id => false do |t|
+		t.column :nested, :nested_type
 	end
 
 	execute "INSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\\d e f'))"
-
-	connection.send(:reload_type_map) if ActiveRecord::VERSION::MAJOR > 3
+	execute "INSERT INTO bars VALUES (((0,'abc'),'red')), (((1,'cba'),'blue'))"
 end

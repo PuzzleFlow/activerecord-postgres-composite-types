@@ -1,22 +1,43 @@
 class PostgresAbstractCustomType
-	class_attribute :columns
+	include Comparable
 
-	def self.inherited(subclass)
-		super
-		subclass.columns = []
-	end
+	class << self
+		# TODO: doc
+		attr_reader :type
+		# TODO: doc
+		attr_reader :columns
 
-	def self.consist_of(*column_definitions)
-		column_definitions.each do |name, default, sql_type = nil, null = nil|
-			self.columns << postgres_column(name, default, sql_type, null)
-			attr_accessor name
+		def register_type(type)
+			@type = type.to_sym
+			ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.register_custom_type_class(self)
+		end
+
+		def use_connection_class(active_record_class)
+			@connection_class = active_record_class
+		end
+
+		def connection
+			(@connection_class || ActiveRecord::Base).connection
+		end
+
+		def connected?
+			(@connection_class || ActiveRecord::Base).connected?
+		end
+
+		def initialize_column_definition
+			unless @columns
+				@columns = self.connection.columns(type)
+				attr_accessor *@columns.map(&:name)
+			end
 		end
 	end
 
 	def initialize(value)
+		self.class.initialize_column_definition
+
 		case value
 			when String
-				load value
+				ActiveRecord::ConnectionAdapters::PostgreSQLColumn.string_to_custom_type(self.class, value)
 			when Array
 				set_values value
 			when Hash
@@ -26,35 +47,17 @@ class PostgresAbstractCustomType
 		end
 	end
 
-	# Load values from the +value+ which is a db string
-	def load(value)
-		if value[0] == ?( && value[value.length-1] == ?)
-			values = value[1..value.length-2].split(',')
-			raise "Invalid number of custom type fields: #{values.size}, expected: #{self.columns.size}" if values.size != self.class.columns.size
-
-			self.class.columns.each.with_index do |column, i|
-				cv = column.type_cast(values[i])
-				if cv.is_a?(String)
-					# unquote
-					cv = cv.upcase == 'NULL' ? nil : cv.gsub(/\A"(.*)"\Z/m,'\1').gsub(/\\(.)/, '\1')
-				end
-				send "#{column.name}=", cv
-			end
-		else
-			raise "Invalid custom type value: #{value.inspect}"
+	def <=>(another)
+		return nil if (self.class <=> another.class) == nil
+		self.class.columns.each do |column|
+			v1 = self.send(column.name)
+			v2 = another.send(column.name)
+			return v1 <=> v2 unless v1 == v2
 		end
+		0
 	end
 
 	private
-
-	def self.postgres_column(name, default, sql_type, null)
-		if ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.const_defined?(:OID) # Rails 4.X
-			oid = ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID::NAMES[sql_type]
-			ActiveRecord::ConnectionAdapters::PostgreSQLColumn.new(name, default, oid, sql_type, null)
-		else # Rails 3.X
-			ActiveRecord::ConnectionAdapters::PostgreSQLColumn.new(name, default, sql_type, null)
-		end
-	end
 
 	def set_attributes(values)
 		values.each do |name, value|

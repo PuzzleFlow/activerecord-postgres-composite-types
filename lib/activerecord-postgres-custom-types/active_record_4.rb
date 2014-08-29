@@ -12,7 +12,8 @@ module ActiveRecord
 
 					# Casts value (which is a String) to an appropriate instance.
 					def type_cast(value)
-						@custom_type_class.new(value)
+						PostgreSQLColumn.string_to_custom_type(@custom_type_class, value)
+						# @custom_type_class.new(value)
 					end
 
 					# Casts a Ruby value to something appropriate for writing to the database.
@@ -28,8 +29,23 @@ module ActiveRecord
 			end
 
 			class << self
-				def register_oid_type(type, klass)
-					OID.register_type type.to_s, OID::CustomType.new(klass)
+				def register_oid_type(klass)
+					OID.register_type klass.type.to_s, OID::CustomType.new(klass)
+					# Dirty. Only this type should be added to type map
+					klass.connection.send(:reload_type_map) if klass.connected?
+				end
+			end
+
+			def add_composite_type_to_map(type)
+				oid_type = OID::NAMES[type.to_s]
+				raise "OID type: '#{type}' not registered" unless oid_type
+
+				result = execute("SELECT oid, typname, typelem, typdelim, typinput FROM pg_type WHERE typname = '#{type}'", 'SCHEMA')
+				raise "Composite type: '#{type}' not defined in PostgreSQL database" if result.empty?
+				row = result[0]
+
+				unless type_map.key? row['typelem'].to_i
+					type_map[row['oid'].to_i] = vector
 				end
 			end
 
@@ -77,7 +93,6 @@ module ActiveRecord
 					else
 						adapter.type_cast(value, column, true)
 					end
-					# adapter.quote(value, column)
 				end
 				"(#{quoted_values.join(',')})"
 			end

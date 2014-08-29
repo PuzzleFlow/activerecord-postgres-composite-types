@@ -10,3 +10,4 @@ else
 end
 
 require "activerecord-postgres-custom-types/abstract_type_class"
+require "activerecord-postgres-custom-types/composite_type_parser"

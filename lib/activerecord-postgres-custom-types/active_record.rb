@@ -17,29 +17,23 @@ module ActiveRecord
 			alias_method_chain :quote, :custom_types
 
 			class << self
-				def register_custom_types(custom_types)
-					custom_types.each do |type, klass|
-						register_custom_type type, klass
-					end
+				def register_custom_type_class(klass)
+					self.custom_type_classes[klass.type] = klass
+					TableDefinition.register_custom_type klass.type
+					Table.register_custom_type klass.type
+					register_arel_visitor klass
+					register_oid_type klass
 				end
 
-				def register_custom_type(type, klass)
-					self.custom_type_classes[type.to_sym] = klass
-					TableDefinition.register_custom_type type
-					Table.register_custom_type type
-					register_arel_visitor type, klass
-					register_oid_type type, klass
-				end
-
-				def register_arel_visitor(type, klass)
+				def register_arel_visitor(klass)
 					Arel::Visitors::ToSql.class_eval <<-RUBY
 						def visit_#{klass}(o, a=nil)
-							@connection.quote(o) + '::#{type}'
+							@connection.quote(o) + '::#{klass.type}'
 						end
 					RUBY
 				end
 
-				def register_oid_type(type, klass)
+				def register_oid_type(klass)
 					# only AR 4.X
 				end
 
@@ -80,6 +74,27 @@ module ActiveRecord
 				if string.present?
 					klass.new(string)
 				end
+			end
+
+			def self.string_to_custom_type(klass, string)
+				return string unless String === string
+				if string.present?
+					fields = CompositeTypeParser.parse_data(string).map.with_index {|val, i| type_cast_custom_type_field(klass, i, val)}
+					klass.new(fields)
+				end
+			end
+
+			def self.type_cast_custom_type_field(klass, i, value)
+				klass.initialize_column_definition
+
+				column = klass.columns[i]
+				raise "Invalid column index: #{i}" unless column
+				cv = column.type_cast(value)
+				if cv.is_a?(String)
+					# unquote
+					cv = cv.upcase == 'NULL' ? nil : cv.gsub(/\A"(.*)"\Z/m) { $1.gsub(/\\(.)/, '\1') }
+				end
+				cv
 			end
 
 			private
