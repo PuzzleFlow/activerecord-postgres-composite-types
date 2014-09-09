@@ -62,6 +62,5 @@ That's all folks.
 
 == Copyright
 
-Copyright (c) 2014 Rafał Bigaj. See LICENSE.txt for
-further details.
+Copyright (c) 2014 PuzzleFlow. See LICENSE for further details.
 
