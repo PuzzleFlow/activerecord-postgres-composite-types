@@ -20,13 +20,13 @@ But there is no support for user defined composite types.
 
 == The Goal
 
-For my composite type 'complex' and table like this:
+I would like to be able to access data from table like this:
 
   create_table :foos, :id => false do |t|
     t.column :comp, :complex, default: "(0,\"\")"
   end
 
-I can access my data in simple and natural way:
+in simple and natural way using ActiveRecord model:
 
   class Foo < ActiveRecord::Base
   end
@@ -42,7 +42,7 @@ and then
   foo.comp.number # => 1.2
   foo.comp.title # => "Cool!"
 
-To achieve this goal I only have to define my composite type in a following way:
+To achieve this goal I only have to define composite type class in a following way:
 
   class ComplexType < PostgresCompositeType
     register_type :complex
