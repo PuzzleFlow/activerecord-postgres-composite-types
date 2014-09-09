@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "activerecord-postgres-composite-types.gemspec",
     "activerecord-postgres-custom-types.gemspec",
     "lib/activerecord-postgres-composite-types.rb",
     "lib/activerecord-postgres-composite-types/active_record.rb",
@@ -43,7 +44,7 @@ Gem::Specification.new do |s|
     "test/test_nested_types.rb",
     "test/test_postgres_composite_types.rb"
   ]
-  s.homepage = "http://github.com/rafalbigaj/activerecord-postgres-composite-types"
+  s.homepage = "http://github.com/puzzleflow/activerecord-postgres-composite-types"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "2.0.3"
