@@ -73,7 +73,7 @@ module ActiveRecord
 				if composite_type_klass = PostgreSQLAdapter.composite_type_classes[type]
 					"#{self.class}.string_to_composite_type(#{composite_type_klass}, #{var_name})"
 				else
-					type_cast_code_without_composite_types(value)
+					type_cast_code_without_composite_types(var_name)
 				end
 			end
 
