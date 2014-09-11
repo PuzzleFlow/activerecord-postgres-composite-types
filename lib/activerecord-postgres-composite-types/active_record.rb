@@ -27,7 +27,7 @@ module ActiveRecord
 
 				def register_arel_visitor(klass)
 					Arel::Visitors::ToSql.class_eval <<-RUBY
-						def visit_#{klass}(o, a=nil)
+						def visit_#{klass.name.gsub('::', '_')}(o, a=nil)
 							@connection.quote(o) + '::#{klass.type}'
 						end
 					RUBY
