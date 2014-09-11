@@ -5,16 +5,15 @@
 
 Gem::Specification.new do |s|
   s.name = "activerecord-postgres-composite-types"
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rafal Bigaj"]
-  s.date = "2014-09-09"
+  s.date = "2014-09-11"
   s.description = "This gem adds support to the ActiveRecord (3.x and 4.x) for composite types."
   s.email = "rafal.bigaj@puzzleflow.com"
   s.extra_rdoc_files = [
     "LICENSE",
-    "LICENSE.txt",
     "README.rdoc"
   ]
   s.files = [
@@ -22,7 +21,6 @@ Gem::Specification.new do |s|
     ".travis.yml",
     "Gemfile",
     "LICENSE",
-    "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
