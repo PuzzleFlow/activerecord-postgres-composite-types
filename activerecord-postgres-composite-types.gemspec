@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "activerecord-postgres-composite-types"
-  s.version = "0.2.2"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rafal Bigaj"]
-  s.date = "2014-09-11"
+  s.date = "2014-09-12"
   s.description = "This gem adds support to the ActiveRecord (3.x and 4.x) for composite types."
   s.email = "rafal.bigaj@puzzleflow.com"
   s.extra_rdoc_files = [
@@ -25,14 +25,13 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "activerecord-postgres-composite-types.gemspec",
-    "activerecord-postgres-custom-types.gemspec",
     "lib/activerecord-postgres-composite-types.rb",
     "lib/activerecord-postgres-composite-types/active_record.rb",
     "lib/activerecord-postgres-composite-types/active_record_3.rb",
     "lib/activerecord-postgres-composite-types/active_record_4.rb",
     "lib/activerecord-postgres-composite-types/composite_type_parser.rb",
-    "lib/activerecord-postgres-composite-types/postgres_composite_type.rb",
-    "lib/activerecord-postgres-composite-types/railties.rb",
+    "lib/activerecord-postgres-composite-types/railtie.rb",
+    "lib/postgres_composite_type.rb",
     "test/composite_types.rb",
     "test/helper.rb",
     "test/internal/config/database.yml",
