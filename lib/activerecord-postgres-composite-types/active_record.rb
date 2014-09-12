@@ -1,4 +1,8 @@
 # Extends AR to add composite types functionality.
+
+require 'active_record/connection_adapters/postgresql_adapter'
+require 'activerecord-postgres-composite-types/composite_type_parser'
+
 module ActiveRecord
 
 	module ConnectionAdapters

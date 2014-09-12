@@ -1,3 +1,4 @@
+require 'postgres_composite_type'
 
 if ActiveRecord::VERSION::MAJOR > 3
 	ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID.alias_type 'rgb_color', 'text'

@@ -1,29 +1,52 @@
+require 'activerecord-postgres-composite-types/active_record'
+
 class PostgresCompositeType
 	include Comparable
 
 	class << self
-		# TODO: doc
+		# The PostgreSQL type name as symbol
 		attr_reader :type
-		# TODO: doc
+		# Column definition read from db schema
 		attr_reader :columns
 
+		# Link PostgreSQL type given by the name with this class.
+		# Usage:
+		#
+		# class ComplexType < PostgresCompositeType
+		#   register_type :complex
+		# end
+		#
+		# @param [Symbol] :type the PostgreSQL type name
 		def register_type(type)
 			@type = type.to_sym
 			ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.register_composite_type_class(self)
 		end
 
+		# Be default the ActiveRecord::Base connection is used when reading type definition.
+		# If you want to use connection linked with another class use this method.
+		# Usage
+		#
+		# class ComplexType < PostgresCompositeType
+		#   register_type :complex
+		#   use_connection_class MyRecordConnectedToDifferentDB
+		# end
+		#
+		# @param [Class] :active_record_class the ActiveRecord model class
 		def use_connection_class(active_record_class)
 			@connection_class = active_record_class
 		end
 
+		# :nodoc:
 		def connection
 			(@connection_class || ActiveRecord::Base).connection
 		end
 
+		# :nodoc:
 		def connected?
 			(@connection_class || ActiveRecord::Base).connected?
 		end
 
+		# :nodoc:
 		def initialize_column_definition
 			unless @columns
 				@columns = self.connection.columns(type)

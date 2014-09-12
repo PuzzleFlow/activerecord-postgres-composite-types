@@ -30,8 +30,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'activerecord-postgres-composite-types'
 
 ActiveSupport.on_load :active_record do
-	require 'activerecord-postgres-composite-types/active_record'
-	require_relative 'composite_types.rb'
+	require_relative 'composite_types'
 end
 
 Combustion.path = 'test/internal'

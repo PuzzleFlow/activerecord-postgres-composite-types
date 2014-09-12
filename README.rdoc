@@ -44,8 +44,24 @@ and then
 
 To achieve this goal I only have to define composite type class in a following way:
 
+  require 'postgres_composite_type'
   class ComplexType < PostgresCompositeType
     register_type :complex
+  end
+
+This class must be loaded before any ActiveRecord model is instantializated, but NOT before
+ActiveRecord is loaded. Load your classes with ActiveRecord hook:
+
+  ActiveSupport.on_load :active_record do
+    require 'complex_type'
+  end
+
+You can of course put this code in your railtie initializer:
+
+  initialize :complexy_type do
+    ActiveSupport.on_load :active_record do
+      require 'complex_type'
+    end
   end
 
 That's all folks.
