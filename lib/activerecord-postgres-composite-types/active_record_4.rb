@@ -88,10 +88,15 @@ module ActiveRecord
 						if value == "NULL"
 							"\"#{value}\""
 						else
-							quote_and_escape(adapter.type_cast(value, column, true))
+              quote_and_escape(adapter.type_cast(value, column, true))
 						end
 					else
-						adapter.type_cast(value, column, true)
+							res = adapter.type_cast(value, column, true)
+              if value.class < PostgresCompositeType
+                quote_and_escape(res)
+              else
+                res
+              end
 					end
 				end
 				"(#{quoted_values.join(',')})"
