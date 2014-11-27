@@ -84,14 +84,32 @@ class PostgresCompositeType
 
 	def set_attributes(values)
 		values.each do |name, value|
-			send "#{name}=", value
+      if Hash === value || Array === value
+        klass = ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.composite_type_classes[self.class.columns.find(name).first.type]
+        unless klass.nil?
+          send "#{name}=", klass.new(value)
+        else
+          send "#{name}=", value
+        end
+      else
+        send "#{name}=", value
+      end
 		end
 	end
 
 	def set_values(values)
 		raise "Invalid values count: #{values.size}, expected: #{self.class.columns.size}" if values.size != self.class.columns.size
 		self.class.columns.each.with_index do |column, i|
-			send "#{column.name}=", values[i]
+      if Hash === values[i] || Array === values[i]
+        klass = ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.composite_type_classes[column.type]
+        unless klass.nil?
+          send "#{column.name}=", klass.new(values[i])
+        else
+          send "#{column.name}=", values[i]
+        end
+      else
+        send "#{column.name}=", values[i]
+      end
 		end
 	end
 

@@ -4,8 +4,12 @@ class TestNestedTypes < Test::Unit::TestCase
 	class Bar < ActiveRecord::Base
 	end
 
+	class Bar2 < ActiveRecord::Base
+	end
+
   setup do
     Bar.delete_all
+    Bar2.delete_all
     Bar.create(nested: {comp: Compfoo.new([0, 'abc']), color: 'red'})
     Bar.create(nested: {comp: Compfoo.new([1, 'cba']), color: 'blue'})
   end
@@ -25,5 +29,20 @@ class TestNestedTypes < Test::Unit::TestCase
     bar = Bar.new(nested: {comp: Compfoo.new([2, 'bac']), color: 'red'})
     bar.save
     assert !bar.new_record?
+  end
+
+  should "build nested types from Hash" do
+    bar = Bar.new(nested: {comp: {f1: 2, f2: 'bac'}, color: 'red'})
+    assert_kind_of NestedType, bar.nested
+  end
+
+  should "build nested types from Array" do
+    bar = Bar.new(nested: [[2, 'bac'], 'red'])
+    assert_kind_of NestedType, bar.nested
+  end
+
+  should "insert with nested type" do
+    bar = Bar2.new(nested: {nested: {comp: [1, 'dca'], color: 'blue'}, color: 'red'})
+    assert_kind_of NestedNestedType, bar.nested
   end
 end
