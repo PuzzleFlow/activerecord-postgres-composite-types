@@ -45,4 +45,13 @@ class TestNestedTypes < Test::Unit::TestCase
     bar = Bar2.new(nested: {nested: {comp: [1, 'dca'], color: 'blue'}, color: 'red'})
     assert_kind_of NestedNestedType, bar.nested
   end
+
+  should "select nested type" do
+    bar = Bar2.new(nested: {nested: {comp: [1, 'dca'], color: 'blue'}, color: 'red'})
+    bar.save
+    bars = Bar2.where(nested: NestedNestedType.new(nested: {comp: [1, 'dca'], color: 'red'}, color: 'red')).all
+    assert_equal 0, bars.count
+    bars = Bar2.where(nested: NestedNestedType.new(nested: {comp: [1, 'dca'], color: 'blue'}, color: 'red')).all
+    assert_equal 1, bars.count
+  end
 end
