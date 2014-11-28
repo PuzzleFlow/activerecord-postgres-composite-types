@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "activerecord-postgres-composite-types"
-  s.version = "0.2.3"
+  s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rafal Bigaj"]
-  s.date = "2014-09-12"
+  s.date = "2014-11-28"
   s.description = "This gem adds support to the ActiveRecord (3.x and 4.x) for composite types."
   s.email = "rafal.bigaj@puzzleflow.com"
   s.extra_rdoc_files = [
@@ -44,7 +44,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/puzzleflow/activerecord-postgres-composite-types"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.3"
+  s.rubygems_version = "2.0.14"
   s.summary = "ActiveRecord composite types support"
 
   if s.respond_to? :specification_version then
