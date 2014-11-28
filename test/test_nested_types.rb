@@ -7,13 +7,6 @@ class TestNestedTypes < Test::Unit::TestCase
 	class Bar2 < ActiveRecord::Base
 	end
 
-  setup do
-    Bar.delete_all
-    Bar2.delete_all
-    Bar.create(nested: {comp: Compfoo.new([0, 'abc']), color: 'red'})
-    Bar.create(nested: {comp: Compfoo.new([1, 'cba']), color: 'blue'})
-  end
-
 	should "cast value properly" do
 		bars = Bar.order('(nested).comp.f1').all
 		assert_equal 2, bars.size
@@ -41,17 +34,14 @@ class TestNestedTypes < Test::Unit::TestCase
     assert_kind_of NestedType, bar.nested
   end
 
-  should "insert with nested type" do
+  should "insert with double nested type" do
     bar = Bar2.new(nested: {nested: {comp: [1, 'dca'], color: 'blue'}, color: 'red'})
     assert_kind_of NestedNestedType, bar.nested
   end
 
   should "select nested type" do
-    bar = Bar2.new(nested: {nested: {comp: [1, 'dca'], color: 'blue'}, color: 'red'})
-    bar.save
-    bars = Bar2.where(nested: NestedNestedType.new(nested: {comp: [1, 'dca'], color: 'red'}, color: 'red')).all
-    assert_equal 0, bars.count
-    bars = Bar2.where(nested: NestedNestedType.new(nested: {comp: [1, 'dca'], color: 'blue'}, color: 'red')).all
-    assert_equal 1, bars.count
+    Bar2.create!(nested: {nested: {comp: [1, 'dca'], color: 'blue'}, color: 'red'})
+    assert !Bar2.where(nested: NestedNestedType.new(nested: {comp: [1, 'dca'], color: 'red'}, color: 'red')).exists?
+    assert Bar2.where(nested: NestedNestedType.new(nested: {comp: [1, 'dca'], color: 'blue'}, color: 'red')).exists?
   end
 end

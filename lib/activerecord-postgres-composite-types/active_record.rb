@@ -32,7 +32,7 @@ module ActiveRecord
 				def register_arel_visitor(klass)
 					Arel::Visitors::Visitor.class_eval <<-RUBY
 						def visit_#{klass.name.gsub('::', '_')}(o, a=nil)
-              "'" + ActiveRecord::ConnectionAdapters::PostgreSQLColumn::composite_type_to_string(o, ActiveRecord::Base.connection) + "'" + '::#{klass.type}'
+              "'" + ActiveRecord::ConnectionAdapters::PostgreSQLColumn::composite_type_to_string(o, @connection) + "'" + '::#{klass.type}'
 						end
 					RUBY
 				end
