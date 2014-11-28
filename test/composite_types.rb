@@ -15,3 +15,7 @@ end
 class NestedType < PostgresCompositeType
 	register_type :nested_type
 end
+
+class NestedNestedType < PostgresCompositeType
+	register_type :nested_nested_type
+end
