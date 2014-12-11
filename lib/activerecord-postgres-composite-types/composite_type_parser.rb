@@ -1,7 +1,7 @@
 module ActiveRecord
-	module ConnectionAdapters
-		class PostgreSQLColumn
-			class CompositeTypeParser
+  module ConnectionAdapters
+    class PostgreSQLColumn
+      class CompositeTypeParser
         class Splitter < StringScanner
           OPEN_PAREN = /\(/.freeze
           CLOSE_PAREN = /\)/.freeze
@@ -37,10 +37,10 @@ module ActiveRecord
           end
         end
 
-				def self.parse_data(string)
-					Splitter.new(string).parse
-				end
-			end
-		end
-	end
+        def self.parse_data(string)
+          Splitter.new(string).parse
+        end
+      end
+    end
+  end
 end

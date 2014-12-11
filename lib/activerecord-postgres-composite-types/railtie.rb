@@ -6,12 +6,12 @@ require 'rails'
 
 class PostgresCompositeTypesRailtie < Rails::Railtie
 
-	initializer 'activerecord-postgres-composite-types' do
-		ActiveSupport.on_load :active_record do
-			require "activerecord-postgres-composite-types/active_record"
-			require 'postgres_composite_type'
-		end
-	end
+  initializer 'activerecord-postgres-composite-types' do
+    ActiveSupport.on_load :active_record do
+      require "activerecord-postgres-composite-types/active_record"
+      require 'postgres_composite_type'
+    end
+  end
 
 end
 

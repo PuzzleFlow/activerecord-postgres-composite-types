@@ -2,7 +2,7 @@ require_relative 'helper'
 
 class TestCompositeTypeClass < Test::Unit::TestCase
 
-	PostgreSQLColumn = ActiveRecord::ConnectionAdapters::PostgreSQLColumn
+  PostgreSQLColumn = ActiveRecord::ConnectionAdapters::PostgreSQLColumn
 
   should "define accessors" do
     assert MyType.method_defined?(:name)

@@ -12,19 +12,19 @@ end
 require 'rake'
 
 unless RUBY_PLATFORM =~ /mswin/
-	require 'jeweler'
-	Jeweler::Tasks.new do |gem|
-		# gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-		gem.name = "activerecord-postgres-composite-types"
-		gem.homepage = "http://github.com/puzzleflow/activerecord-postgres-composite-types"
-		gem.license = "MIT"
-		gem.summary = %Q{ActiveRecord composite types support}
-		gem.description = %Q{This gem adds support to the ActiveRecord (3.x and 4.x) for composite types.}
-		gem.email = "rafal.bigaj@puzzleflow.com"
-		gem.authors = ["Rafal Bigaj"]
-		# dependencies defined in Gemfile
-	end
-	Jeweler::RubygemsDotOrgTasks.new
+  require 'jeweler'
+  Jeweler::Tasks.new do |gem|
+    # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
+    gem.name = "activerecord-postgres-composite-types"
+    gem.homepage = "http://github.com/puzzleflow/activerecord-postgres-composite-types"
+    gem.license = "MIT"
+    gem.summary = %Q{ActiveRecord composite types support}
+    gem.description = %Q{This gem adds support to the ActiveRecord (3.x and 4.x) for composite types.}
+    gem.email = "rafal.bigaj@puzzleflow.com"
+    gem.authors = ["Rafal Bigaj"]
+    # dependencies defined in Gemfile
+  end
+  Jeweler::RubygemsDotOrgTasks.new
 end
 
 require 'rake/testtask'
