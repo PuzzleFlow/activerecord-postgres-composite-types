@@ -19,7 +19,7 @@ module ActiveRecord
           # Casts a Ruby value to something appropriate for writing to the database.
           def type_cast_for_write(value)
             # Cast Hash and Array to composite type klass
-            if value.is_a?(@composite_type_class)
+            if value.is_a?(@composite_type_class) || value.nil?
               value
             else
               @composite_type_class.new(value)
