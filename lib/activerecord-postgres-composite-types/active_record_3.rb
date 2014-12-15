@@ -86,7 +86,7 @@ module ActiveRecord
       extend ActiveSupport::Concern
 
       def type_cast_attribute_for_write(column, value)
-        if column && klass = column.composite_type_class
+        if column && !value.nil? && klass = column.composite_type_class
           # Cast Hash and Array to composite type klass
           if value.is_a?(klass)
             value

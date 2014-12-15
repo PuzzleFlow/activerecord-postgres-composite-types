@@ -45,4 +45,11 @@ class TestPostgresCompositeTypes < Test::Unit::TestCase
     assert_equal 'text 3', foo.comp.f2
     assert Foo.where(comp: Compfoo.new({f1: 111, f2: 'text 3'})).exists?
   end
+
+  should 'make object nil' do
+    foo = Foo.create!(comp: [333, 'ala ma kota'])
+    foo.comp = nil
+
+    assert_nil foo.comp
+  end
 end
