@@ -1,6 +1,6 @@
 # ActiveRecord 4.2 specific extensions.
 
-require_relative 'oid/composite_type'
+require_relative 'oid/composite_type_4_2'
 
 module ActiveRecord
 
