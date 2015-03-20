@@ -1,33 +1,12 @@
-# ActiveRecord 3.X specific extensions.
+# ActiveRecord 4.0, 4.1 specific extensions.
+
+require_relative 'oid/composite_type'
+
 module ActiveRecord
 
   module ConnectionAdapters
 
     class PostgreSQLAdapter
-      module OID
-        class CompositeType < Type
-          def initialize(composite_type_class)
-            @composite_type_class = composite_type_class
-          end
-
-          # Casts value (which is a String) to an appropriate instance.
-          def type_cast(value)
-            PostgreSQLColumn.string_to_composite_type(@composite_type_class, value)
-            # @composite_type_class.new(value)
-          end
-
-          # Casts a Ruby value to something appropriate for writing to the database.
-          def type_cast_for_write(value)
-            # Cast Hash and Array to composite type klass
-            if value.is_a?(@composite_type_class) || value.nil?
-              value
-            else
-              @composite_type_class.new(value)
-            end
-          end
-        end
-      end
-
       class << self
         def register_oid_type(klass)
           OID.register_type klass.type.to_s, OID::CompositeType.new(klass)
@@ -36,18 +15,15 @@ module ActiveRecord
         end
       end
 
-      def add_composite_type_to_map(type)
-        oid_type = OID::NAMES[type.to_s]
-        raise "OID type: '#{type}' not registered" unless oid_type
-
-        result = execute("SELECT oid, typname, typelem, typdelim, typinput FROM pg_type WHERE typname = '#{type}'", 'SCHEMA')
-        raise "Composite type: '#{type}' not defined in PostgreSQL database" if result.empty?
-        row = result[0]
-
-        unless type_map.key? row['typelem'].to_i
-          type_map[row['oid'].to_i] = vector
-        end
+      # Quotes the column value to help prevent {SQL injection attacks}
+      def quote_with_composite_types(value, column = nil)
+	      if value.class < PostgresCompositeType
+		      "'#{PostgreSQLColumn.composite_type_to_string(value, self).gsub(/'/, "''")}'"
+	      else
+		      quote_without_composite_types(value, column)
+	      end
       end
+      alias_method_chain :quote, :composite_types
 
       # Cast a +value+ to a type that the database understands.
       def type_cast_with_composite_types(value, column, array_member = false)

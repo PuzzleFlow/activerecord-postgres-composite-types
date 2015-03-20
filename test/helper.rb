@@ -24,6 +24,8 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
+require 'shoulda'
+
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
@@ -35,6 +37,8 @@ end
 
 Combustion.path = 'test/internal'
 Combustion.initialize! :active_record
+
+ActiveRecord::Base.default_timezone = :utc
 
 class Test::Unit::TestCase
   def connection

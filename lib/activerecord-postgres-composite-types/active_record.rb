@@ -9,36 +9,12 @@ module ActiveRecord
 
     class PostgreSQLAdapter
 
-      # Quotes the column value to help prevent {SQL injection attacks}
-      def quote_with_composite_types(value, column = nil)
-        if value.class < PostgresCompositeType
-          "'#{PostgreSQLColumn.composite_type_to_string(value, self).gsub(/'/, "''")}'"
-        else
-          quote_without_composite_types(value, column)
-        end
-      end
-
-      alias_method_chain :quote, :composite_types
-
       class << self
         def register_composite_type_class(klass)
           self.composite_type_classes[klass.type] = klass
           TableDefinition.register_composite_type klass.type
           Table.register_composite_type klass.type
-          register_arel_visitor klass
           register_oid_type klass
-        end
-
-        def register_arel_visitor(klass)
-          Arel::Visitors::Visitor.class_eval <<-RUBY
-						def visit_#{klass.name.gsub('::', '_')}(o, a=nil)
-              "'" + ActiveRecord::ConnectionAdapters::PostgreSQLColumn::composite_type_to_string(o, o.class.connection) + "'" + '::#{klass.type}'
-						end
-          RUBY
-        end
-
-        def register_oid_type(klass)
-          # only AR 4.X
         end
 
         # removes composite types definition (for testing)
@@ -86,7 +62,8 @@ module ActiveRecord
 
         column = klass.columns[i]
         raise "Invalid column index: #{i}" unless column
-        cv = column.type_cast(value)
+
+        cv = column.type_cast_from_database(value)
         if cv.is_a?(String)
           # unquote
           cv = cv.upcase == 'NULL' ? nil : cv.gsub(/\A"(.*)"\Z/m) { $1.gsub(/\\(.)/, '\1') }
@@ -94,18 +71,24 @@ module ActiveRecord
         cv
       end
 
-      private
-
-      def simplified_type_with_composite_types(field_type)
-        type = field_type.to_sym
-        if PostgreSQLAdapter.composite_type_classes.has_key?(type)
-          type
-        else
-          simplified_type_without_composite_types(field_type)
-        end
+      unless method_defined?(:type_cast_from_database) # AR ver < 4.2
+				alias_method :type_cast_from_database, :type_cast
       end
 
-      alias_method_chain :simplified_type, :composite_types
+      private
+
+       if private_method_defined?(:simplified_type) # up to v4.1
+ 	      def simplified_type_with_composite_types(field_type)
+ 	        type = field_type.to_sym
+ 	        if PostgreSQLAdapter.composite_type_classes.has_key?(type)
+ 	          type
+ 	        else
+ 	          simplified_type_without_composite_types(field_type)
+ 	        end
+ 	      end
+
+ 	      alias_method_chain :simplified_type, :composite_types
+       end
     end
 
     class << TableDefinition
@@ -160,4 +143,8 @@ module ActiveRecord
 
 end
 
-require_relative "active_record_#{ActiveRecord::VERSION::MAJOR}"
+begin
+	require_relative "active_record_#{ActiveRecord::VERSION::STRING[0..2].sub('.', '_')}"
+rescue LoadError
+	raise "Unsupported ActiveRecord version: #{ActiveRecord::VERSION::STRING}"
+end

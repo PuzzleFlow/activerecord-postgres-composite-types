@@ -46,19 +46,19 @@ class TestNestedTypes < Test::Unit::TestCase
   end
 
   should "parser should work when nested attribute contains parenthesis" do
-    bar = Bar2.create!(nested: {nested: {comp: [1, 'dc)))a'], color: 'blue'}, color: 'red'})
-    Bar2.all.to_a.last.nested
-    assert true
+    Bar2.create!(nested: {nested: {comp: [1, 'dc)))a'], color: 'blue'}, color: 'red'})
+    assert_equal 'dc)))a', Bar2.all.to_a.last.nested.nested.comp.f2
+	  assert Bar2.where(nested: NestedNestedType.new(nested: {comp: [1, 'dc)))a'], color: 'blue'}, color: 'red')).exists?
   end
 
   should "parser should work when nested attribute contains double quote" do
-    bar = Bar2.create!(nested: {nested: {comp: [1, "dc\"a"], color: 'blue'}, color: 'blue'})
+    Bar2.create!(nested: {nested: {comp: [1, "dc\"a"], color: 'blue'}, color: 'blue'})
     assert_equal 'blue', Bar2.all.to_a.last.nested.color
     assert_equal 'dc"a', Bar2.all.to_a.last.nested.nested.comp.f2
   end
 
   should "parser should work when nested attribute contains backslash" do
-    bar = Bar2.create!(nested: {nested: {comp: [1, "dc\\a"], color: 'blue'}, color: 'green'})
+    Bar2.create!(nested: {nested: {comp: [1, "dc\\a"], color: 'blue'}, color: 'green'})
     assert_equal 'green', Bar2.all.to_a.last.nested.color
     assert_equal 'dc\\a', Bar2.all.to_a.last.nested.nested.comp.f2
   end

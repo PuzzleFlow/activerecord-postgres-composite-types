@@ -4,6 +4,10 @@ class TestCompositeTypeClass < Test::Unit::TestCase
 
   PostgreSQLColumn = ActiveRecord::ConnectionAdapters::PostgreSQLColumn
 
+  setup do
+	  @my_type_column = connection.columns(:my_table).first
+  end
+
   should "define accessors" do
     assert MyType.method_defined?(:name)
     assert MyType.method_defined?(:name=)
@@ -36,7 +40,8 @@ class TestCompositeTypeClass < Test::Unit::TestCase
 
   should "cast to qouted string" do
     value = MyType.new(number: 1, name: '"\'a\'bc[]*/\"', date: Time.parse('2014-08-27 12:00:00 UTC'))
-    assert_equal %Q{'("\\\"''a''bc[]*/\\\\\\\"",1,2014-08-27 12:00:00.000000)'}, connection.quote(value)
+    quoted = connection.quote(value, @my_type_column).sub(':00.000000', ':00 UTC') # On AR ver < 4.2 time is quoted to format with milliseconds
+    assert_equal %Q{'("\\\"''a''bc[]*/\\\\\\\"",1,2014-08-27 12:00:00 UTC)'}, quoted
   end
 
   should "parse string and return array" do

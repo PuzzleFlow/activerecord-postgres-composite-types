@@ -7,6 +7,10 @@ ActiveRecord::Schema.define do
   execute "CREATE TYPE nested_type AS (comp compfoo, color rgb_color)"
   execute "CREATE TYPE nested_nested_type AS (nested nested_type, color rgb_color)"
 
+  create_table :my_table, :id => false do |t|
+    t.column :value, :my_type
+  end
+
   create_table :foos, :id => false do |t|
     t.column :comp, :compfoo, default: "(0,\"\")"
   end
@@ -22,3 +26,5 @@ ActiveRecord::Schema.define do
   execute "INSERT INTO foos VALUES ((0,'abc')), ((1,'a/b''c\\d e f'))"
   execute "INSERT INTO bars VALUES (((0,'abc'),'red')), (((1,'cba'),'blue'))"
 end
+
+ActiveRecord::Base.connection.send(:reload_type_map) rescue nil # only v4.X

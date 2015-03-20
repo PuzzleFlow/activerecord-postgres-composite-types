@@ -1,6 +1,6 @@
 require 'postgres_composite_type'
 
-if ActiveRecord::VERSION::MAJOR > 3
+if ActiveRecord::VERSION::MAJOR > 3 && ActiveRecord::VERSION::MINOR < 2 # v4.0 & v4.1
   ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID.alias_type 'rgb_color', 'text'
 end
 
