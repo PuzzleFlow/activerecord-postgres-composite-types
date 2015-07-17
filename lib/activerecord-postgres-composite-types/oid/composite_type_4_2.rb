@@ -28,7 +28,7 @@ module ActiveRecord
 
 					def type_cast_for_database(object)
 						return object if object.is_a?(String) # already quoted by AREL visitor
-						return "NULL" if object == nil
+						return nil if object == nil
 						quoted_values = object.class.columns.collect do |column|
 							value = object.send(column.name)
 							if String === value
