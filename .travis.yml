@@ -1,10 +1,11 @@
 language: ruby
 rvm:
-  - 2.1.0
+  - 2.1.6
+  - 2.2.2
 env:
-  - AR_VERSION=3.2.0
-  - AR_VERSION=4.1.9
-  - AR_VERSION=4.2.0
+  - AR_VERSION=3.2.22
+  - AR_VERSION=4.1.12
+  - AR_VERSION=4.2.3
 addons:
   postgresql: "9.3"
 before_script:
