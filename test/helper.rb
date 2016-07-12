@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'minitest/autorun'
 
 module SimpleCov::Configuration
   def clean_filters
@@ -15,7 +16,7 @@ ENV["COVERAGE"] && SimpleCov.start do
   add_filter "/.rvm/"
 end
 require 'rubygems'
-require 'bundler'
+require 'bundler/setup'
 begin
   Bundler.require(:default, :development)
 rescue Bundler::BundlerError => e

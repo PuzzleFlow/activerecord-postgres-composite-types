@@ -1,10 +1,11 @@
 require_relative 'helper'
+require 'minitest/autorun'
 
 class TestCompositeTypeClass < ActiveSupport::TestCase
 
   PostgreSQLColumn = ActiveRecord::ConnectionAdapters::PostgreSQLColumn
 
-  setup do
+  def setup
 	  @my_type_column = connection.columns(:my_table).first
   end
 
